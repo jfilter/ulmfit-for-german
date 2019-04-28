@@ -72,7 +72,7 @@ To test the performance of the model, experiments on the experiment dataset [10k
 
 ## Citation
 
-If you find the languge model useful for an academic publication, then please use the following BibTeX to cite it:
+If you find the langauge model useful for an academic publication, then please use the following BibTeX to cite it:
 
 ```tex
 @misc{ulmfit_german_filter_2019
