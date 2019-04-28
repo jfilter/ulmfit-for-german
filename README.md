@@ -12,6 +12,14 @@ is broken in the following tokens:
 
 > ['_zeitungs', 'komment', 'are', '_sind', '_eine', '_hervor', 'ragende', '_möglichkeit', '_zum', '_meinungs', 'austausch', '.']
 
+## Download
+
+[Download the model](https://github.com/jfilter/ulmfit-for-german/releases/download/0.1.0/ulmfit_for_german_jfilter.pth) (~350mb) directly or use wget:
+
+```bash
+wget https://github.com/jfilter/ulmfit-for-german/releases/download/0.1.0/ulmfit_for_german_jfilter.pth
+```
+
 ## Usage
 
 ```python
@@ -34,7 +42,7 @@ data_lm = TextLMDataBunch.from_ids('exp', vocab=voc, train_ids=df_train['text'],
 
 # setup learner, download the model beforehand
 learn_lm = language_model_learner(data_lm)
-learn_lm.load('path/to/model')
+learn_lm.load('path/to/model/ulmfit_for_german_jfilter.pth')
 
 # ... training language model etc. ...
 
@@ -60,7 +68,21 @@ We trained for five epochs which took three days on a single GTX1800ti, with a b
 
 ## Experiments
 
-To test the performance of the model, I conducted experiments on the experiment dataset [10kGND](https://github.com/tblock/10kGNAD). The best consists of about 10k German news articles in 9 different classes. The best model achieved a accuray on the validation and test set of 91% and 88.3%, respectively. The details are in the accompanying [Notebook](Experiment_10kGNAD.ipynb).
+To test the performance of the model, experiments on the experiment dataset [10kGND](https://github.com/tblock/10kGNAD) were conducted. The dataset consists of about 10k German news articles in 9 different classes. The best model achieved a accuray on the validation and test set of 91% and 88.3%, respectively. The details are in the accompanying [Notebook](Experiment_10kGNAD.ipynb).
+
+## Citation
+
+If you find the languge model useful for an academic publication, then please use the following BibTeX to cite it:
+
+```tex
+@misc{ulmfit_german_filter_2019
+    title={A Pre-trained German Language Model with Sub-word Tokenization for ULMFIT},
+    author={Johannes Filter},
+    year={2019},
+    publisher={GitHub},
+    howpublished={\url{https://github.com/jfilter/ulmfit-for-german},
+}
+```
 
 ## License
 
