@@ -41,8 +41,11 @@ df_train['text'].apply(lambda x: bpemb_de.encode_ids_with_bos_eos(clean(x, lang=
 data_lm = TextLMDataBunch.from_ids('exp', vocab=voc, train_ids=df_train['text'], valid_ids=df_valid['text'])
 
 # setup learner, download the model beforehand
-learn_lm = language_model_learner(data_lm)
-learn_lm.load('path/to/model/ulmfit_for_german_jfilter.pth')
+# because of some breaking changes with fastai, change the number of hidden layers. https://github.com/jfilter/ulmfit-for-german/issues/1
+config = awd_lstm_lm_config.copy()
+config['n_hid'] = 1150
+learn_lm = language_model_learner(data_lm, AWD_LSTM, drop_mult=0.5, pretrained=False, config=config)
+learn_lm.load('ulmfit_for_german_jfilter') # the model should be placed here `exp/models/ulmfit_for_german_jfilter.pth`
 
 # ... training language model etc. ...
 
@@ -54,7 +57,7 @@ data_clas = TextClasDataBunch.from_ids('exp', pad_idx=25000, vocab=voc, classes=
     valid_lbls=df_valid['label'], valid_ids=df_valid['text'])
 ```
 
-See the [Notebook](Experiment_10kGNAD.ipynb) for a complete walkthrough.
+See the [Notebook](Experiment_10kGNAD.ipynb) for a complete walkthrough. NB: The notebook doesn't run with latest version the fastai library. [How to fix this](https://github.com/jfilter/ulmfit-for-german/issues/1).
 
 ## Training of the Language Model
 
